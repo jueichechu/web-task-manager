@@ -42,10 +42,11 @@ cd web-task-manager
 
 ### Setup Instruction for frontend
 
-1. **Install dependencies:**
+1. **Install dependencies.**
+   In a new terminal:
 
    ```bash
-   cd ../frontend
+   cd frontend
    npm install
    ```
 
