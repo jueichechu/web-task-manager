@@ -9,9 +9,10 @@ const app = express(); // creates an instance of an Express application
 
 app.use(express.json()); // middleware in Express that allows server to parse incoming JSON request bodies into req.body
 
-// Mounts the specified middleware function taskRoutes router at the specified path "/api/tasks"
+// Mounts the specified middleware function taskRoutes router at the specified path "/tasks"
 // the middleware function is executed when the base of the requested path matches path
-app.use("/api/tasks", taskRoutes);
+// for any incoming request whose URL starts with "/tasks" path, hand control over to "taskRoutes" middleware (router)
+app.use("/tasks", taskRoutes);
 
 // listen to incoming request on port 5000. The callback function is executed once the server starts up
 app.listen(5000, () => {

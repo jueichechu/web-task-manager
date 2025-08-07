@@ -3,7 +3,8 @@ import Task from "../models/task.model.js"; // to access Task collection in Mong
 
 const router = express.Router(); // create new Router instance, "mini-app" to attach to the main app
 
-// Route to fetch all tasks
+// Create RESTful API routes:
+// GET /tasks - fetch all tasks
 router.get("/", async (req, res) => {
   try {
     const tasks = await Task.find(); // Mongoose model find() to fetch all tasks documents from MongoDB collection
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Route to add a new task (with title text)
+// POST /tasks - create a new task (with title text)
 router.post("/", async (req, res) => {
   const task = new Task({
     text: req.body.text, // get the task description from the request body from client
@@ -26,8 +27,8 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Route to update a task's text and/or toggle task completion status
-router.patch("/:id", async (req, res) => {
+// PUT /tasks/:id - toggle completion status or update a task
+router.put("/:id", async (req, res) => {
   try {
     const task = await Task.findById(req.params.id); // find the task by its ID from the request parameters from client
     if (!task) return res.status(404).json({ message: "Task not found" }); // if task not found, send 404 status code
@@ -46,7 +47,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// Route to delete a task by its ID
+// DELETE /tasks/:id - delete a task
 router.delete("/:id", async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id); // find the task by ID and delete it from collection
